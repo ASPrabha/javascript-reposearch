@@ -11,17 +11,10 @@ function searchRepo(){
 	let repo = document.getElementById('repoSearch').value;
 	let count = Number(document.getElementById('countItem').value);
 	let result = [];
-	document.getElementById('repo-feedback').innerHTML = '';
-	document.getElementById('count-feedback').innerHTML = '';
-	let flag = false;
-
-	if(repo != "" && count !=0 && regEx.test(repo)){
-
-		result.push(repo);
+	result.push(repo);
 		for (var i = 0; i < len;i = i+7) {
 			if(table_data[i].innerHTML == repo){
 				result.push(table_data[i+count].innerHTML);
-				flag = true;
 				break;
 			}
 		}
@@ -66,10 +59,8 @@ function searchRepo(){
 
 			thead.appendChild(hrow);
 			table.appendChild(thead);
-		}
-		else{
-			document.getElementById('repo-feedback').innerHTML = 'Git hub URL do not match available Repos';
-		}
+		
+		
 	}else if (repo === "" || !regEx.test(repo)){
 		if(repo === ""){
 			document.getElementById('repo-feedback').innerHTML = 'Please enter the Git hub URL';
