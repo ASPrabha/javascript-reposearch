@@ -1,0 +1,16 @@
+/*@import "https://fonts.googleapis.com/css?family=Righteous";*/
+
+/*
+  Styling the body content
+*/
+body{
+ /*-webkit-font-smoothing: antialiased;*/
+ text-rendering: optimizelegibility;
+ background-color: #fff;
+ /*font-family: 'Righteous', cursive;*/
+ color: #000;
+}
+
+.feedback{
+	color: red;
+}
