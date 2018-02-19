@@ -11,56 +11,57 @@ function searchRepo(){
 	let repo = document.getElementById('repoSearch').value;
 	let count = Number(document.getElementById('countItem').value);
 	let result = [];
-	result.push(repo);
+	document.getElementById('repo-feedback').innerHTML = '';
+	document.getElementById('count-feedback').innerHTML = '';
+
+	if(repo != "" && count !=0 && regEx.test(repo)){
+
+		result.push(repo);
 		for (var i = 0; i < len;i = i+7) {
 			if(table_data[i].innerHTML == repo){
 				result.push(table_data[i+count].innerHTML);
 				break;
 			}
 		}
-		if(flag){
+		var table = document.getElementById('ans-table');
+		if(table.getElementsByTagName("thead")[0]){
+			table.removeChild(table.getElementsByTagName("thead")[0]);
+		}
+		if(table.getElementsByTagName("tbody")[0]){
+			table.removeChild(table.getElementsByTagName("tbody")[0]);
+		}
 
-			var table = document.getElementById('ans-table');
-			if(table.getElementsByTagName("thead")[0]){
-				table.removeChild(table.getElementsByTagName("thead")[0]);
-			}
-			if(table.getElementsByTagName("tbody")[0]){
-				table.removeChild(table.getElementsByTagName("tbody")[0]);
-			}
+		var thead = document.createElement("thead");
+		var hrow = document.createElement("tr");
 
-			var thead = document.createElement("thead");
-			var hrow = document.createElement("tr");
+		var cell = document.createElement("th");
+		var cellText = document.createTextNode(headElements[0].innerHTML);
+		cell.appendChild(cellText);
+		hrow.appendChild(cell)
 
-			var cell = document.createElement("th");
-			var cellText = document.createTextNode(headElements[0].innerHTML);
-			cell.appendChild(cellText);
-			hrow.appendChild(cell)
+		var cell = document.createElement("th");
+		var cellText = document.createTextNode(headElements[count].innerHTML);
+		cell.appendChild(cellText);
+		hrow.appendChild(cell);
 
-			var cell = document.createElement("th");
-			var cellText = document.createTextNode(headElements[count].innerHTML);
-			cell.appendChild(cellText);
-			hrow.appendChild(cell);
+		thead.appendChild(hrow);
+		table.appendChild(thead);
 
-			thead.appendChild(hrow);
-			table.appendChild(thead);
+		var thead = document.createElement("tbody");
+		var hrow = document.createElement("tr");
 
-			var thead = document.createElement("tbody");
-			var hrow = document.createElement("tr");
+		var cell = document.createElement("td");
+		var cellText = document.createTextNode(result[0]);
+		cell.appendChild(cellText);
+		hrow.appendChild(cell)
 
-			var cell = document.createElement("td");
-			var cellText = document.createTextNode(result[0]);
-			cell.appendChild(cellText);
-			hrow.appendChild(cell)
+		var cell = document.createElement("td");
+		var cellText = document.createTextNode(result[1]);
+		cell.appendChild(cellText);
+		hrow.appendChild(cell);
 
-			var cell = document.createElement("td");
-			var cellText = document.createTextNode(result[1]);
-			cell.appendChild(cellText);
-			hrow.appendChild(cell);
-
-			thead.appendChild(hrow);
-			table.appendChild(thead);
-		
-		
+		thead.appendChild(hrow);
+		table.appendChild(thead);
 	}else if (repo === "" || !regEx.test(repo)){
 		if(repo === ""){
 			document.getElementById('repo-feedback').innerHTML = 'Please enter the Git hub URL';
